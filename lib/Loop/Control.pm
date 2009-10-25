@@ -1,14 +1,11 @@
 package Loop::Control;
-
+use 5.008;
 use strict;
 use warnings;
 use Scope::Upper qw(reap :words);
-
 use base 'Exporter';
-
-our $VERSION = '0.01';
-
-our @EXPORT = qw(FIRST NEXT);
+our $VERSION = '0.02';
+our @EXPORT  = qw(FIRST NEXT);
 
 sub callstack_depth {
     my $depth = 0;
@@ -20,7 +17,7 @@ sub FIRST (&) {
     my $code = shift;
     my ($package, $filename, $line) = caller;
     my $callstack_depth = callstack_depth();
-    my $key = "FIRST $package $filename $line $callstack_depth";
+    my $key             = "FIRST $package $filename $line $callstack_depth";
     our %seen;
     unless ($seen{$key}++) {
         $code->();
@@ -32,9 +29,7 @@ sub NEXT (&) {
     my $code = shift;
     reap sub { $code->() } => UP;
 }
-
 1;
-
 __END__
 
 =head1 NAME
@@ -62,7 +57,7 @@ This module provides ways to execute code at certain points in a C<for> or
 C<while> loop that are outside the normal control flow. For example, you could
 have code that executes only during the first iteration of a loop, or code that
 executes after every iteration of the loop, regardless of how the iteration
-ended (normally or via C<next>).  .
+ended (normally or via C<next>). 
 
 =head1 METHODS
 
@@ -114,7 +109,7 @@ See perlmodinstall for information and options on installing Perl modules.
 
 The latest version of this module is available from the Comprehensive Perl
 Archive Network (CPAN). Visit L<http://www.perl.com/CPAN/> to find a CPAN
-site near you. Or see L<http://www.perl.com/CPAN/authors/id/M/MA/MARCEL/>.
+site near you. Or see L<http://search.cpan.org/dist/Loop-Control/>.
 
 The development version lives at L<http://github.com/hanekomu/loop-control/>.
 Instead of sending patches, please fork this project using the standard git

@@ -1,16 +1,14 @@
 #!/usr/bin/env perl
-
 use warnings;
 use strict;
 use Loop::Control;
 use Test::More tests => 1;
 use Test::Differences;
-
 my $output = '';
 sub record { $output .= join '' => @_ }
-
 record "before the loop\n";
 my $x = 0;
+
 while ($x < 4) {
     NEXT { record "reap A iteration $x\n" };
     $x++;
@@ -20,7 +18,6 @@ while ($x < 4) {
     record "end iteration $x\n";
 }
 record "after the loop\n";
-
 eq_or_diff $output, <<EOEXPECT, 'output';
 before the loop
 begin iteration 1
@@ -37,4 +34,3 @@ reap B iteration 4
 reap A iteration 4
 after the loop
 EOEXPECT
-

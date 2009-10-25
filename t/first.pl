@@ -1,11 +1,9 @@
 #!/usr/bin/env perl
-
 use warnings;
 use strict;
 use Loop::Control;
 use Test::More tests => 1;
 use Test::Differences;
-
 my $output = '';
 sub record { $output .= join '' => @_ }
 
@@ -13,32 +11,26 @@ sub doit {
     my ($level, $iterations) = @_;
     return if $level > 2;
     record "level $level: begin\n";
-
-    for (1..$iterations) {
+    for (1 .. $iterations) {
         FIRST { record "level $level, block 1, iter $_: FIRST A\n" };
         record "level $level, block 1, iter $_: before\n";
         record "level $level, block 1, iter $_: middle\n";
         FIRST { record "level $level, block 1, iter $_: FIRST B\n" };
         record "level $level, block 1, iter $_: after\n";
     }
-
     record "\n";
-    doit($level+1, $iterations);
-
-    for (1..$iterations) {
+    doit($level + 1, $iterations);
+    for (1 .. $iterations) {
         FIRST { record "level $level, block 2, iter $_: FIRST A\n" };
         record "level $level, block 2, iter $_: before\n";
         record "level $level, block 2, iter $_: middle\n";
         FIRST { record "level $level, block 2, iter $_: FIRST B\n" };
         record "level $level, block 2, iter $_: after\n";
     }
-
     record "level $level: end\n\n";
 }
-
 doit(1, 3);
 doit(1, 3);
-
 chomp $output;
 eq_or_diff $output, <<EOEXPECT, 'output';
 level 1: begin
