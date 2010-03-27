@@ -1,10 +1,12 @@
-package Loop::Control;
 use 5.008;
 use strict;
 use warnings;
+
+package Loop::Control;
+our $VERSION = '1.100860';
+# ABSTRACT: FIRST and NEXT functions for loops
 use Scope::Upper qw(reap :words);
-use base 'Exporter';
-our $VERSION = '0.02';
+use Exporter qw(import);
 our @EXPORT  = qw(FIRST NEXT);
 
 sub callstack_depth {
@@ -30,11 +32,18 @@ sub NEXT (&) {
     reap sub { $code->() } => UP;
 }
 1;
+
+
 __END__
+=pod
 
 =head1 NAME
 
 Loop::Control - FIRST and NEXT functions for loops
+
+=head1 VERSION
+
+version 1.100860
 
 =head1 SYNOPSIS
 
@@ -61,9 +70,7 @@ ended (normally or via C<next>).
 
 =head1 METHODS
 
-=over 4
-
-=item C<FIRST>
+=head2 FIRST
 
 Automatically exported, this function is meant to be placed inside a C<for> or
 C<while> loop. It takes a code block which it will execute only during the
@@ -74,7 +81,7 @@ loop is called recursively, each recursion level is treated as a separate loop.
 The block will have additional entries in the call stack, that is, C<caller()>
 will not show the same results as the code that is placed directly in the loop.
 
-=item C<NEXT>
+=head2 NEXT
 
 Automatically exported, this function is meant to be placed inside a C<for> or
 C<while> loop. It takes a code block which it will execute after each iteration
@@ -85,46 +92,46 @@ in the reverse order in which they were encountered.
 The block will have additional entries in the call stack, that is, C<caller()>
 will not show the same results as the code that is placed directly in the loop.
 
-=item C<callstack_depth>
+=head2 callstack_depth
 
 Convenience function that returns the number of levels on the call stack, that
 is, the maximum number for which C<caller($i)> will return data. The number
 includes the call stack entry for C<callstack_depth()> itself. This function is
 used by C<NEXT> and is not exported.
 
-=back
+=head1 INSTALLATION
+
+See perlmodinstall for information and options on installing Perl modules.
 
 =head1 BUGS AND LIMITATIONS
 
 No bugs have been reported.
 
 Please report any bugs or feature requests through the web interface at
-L<http://rt.cpan.org>.
-
-=head1 INSTALLATION
-
-See perlmodinstall for information and options on installing Perl modules.
+L<http://rt.cpan.org/Public/Dist/Display.html?Name=Loop-Control>.
 
 =head1 AVAILABILITY
 
 The latest version of this module is available from the Comprehensive Perl
 Archive Network (CPAN). Visit L<http://www.perl.com/CPAN/> to find a CPAN
-site near you. Or see L<http://search.cpan.org/dist/Loop-Control/>.
+site near you, or see
+L<http://search.cpan.org/dist/Loop-Control/>.
 
-The development version lives at L<http://github.com/hanekomu/loop-control/>.
+The development version lives at
+L<http://github.com/hanekomu/Loop-Control/>.
 Instead of sending patches, please fork this project using the standard git
 and github infrastructure.
 
-=head1 AUTHORS
+=head1 AUTHOR
 
-Marcel GrE<uuml>nauer, C<< <marcel@cpan.org> >>
+  Marcel Gruenauer <marcel@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright 2009 by Marcel GrE<uuml>nauer
+This software is copyright (c) 2009 by Marcel Gruenauer.
 
-This library is free software; you can redistribute it and/or modify
-it under the same terms as Perl itself.
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
 
 =cut
 
