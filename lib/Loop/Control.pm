@@ -3,7 +3,7 @@ use strict;
 use warnings;
 
 package Loop::Control;
-our $VERSION = '1.100860';
+our $VERSION = '1.100861';
 # ABSTRACT: FIRST and NEXT functions for loops
 use Scope::Upper qw(reap :words);
 use Exporter qw(import);
@@ -43,7 +43,7 @@ Loop::Control - FIRST and NEXT functions for loops
 
 =head1 VERSION
 
-version 1.100860
+version 1.100861
 
 =head1 SYNOPSIS
 

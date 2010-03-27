@@ -2,7 +2,7 @@ NAME
     Loop::Control - FIRST and NEXT functions for loops
 
 VERSION
-    version 1.100860
+    version 1.100861
 
 SYNOPSIS
         use Loop::Control;

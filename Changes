@@ -1,6 +1,6 @@
 Revision history for Perl extension Loop-Control
 
-1.100860  2010-03-27 11:36:23 Europe/Vienna
+1.100861  2010-03-27 11:36:54 Europe/Vienna
     - converted the distribution to Dist::Zilla-style
 
 0.03 Tue 2010.02.09 13:55:47 CET (Marcel Gruenauer <marcel@cpan.org>)
